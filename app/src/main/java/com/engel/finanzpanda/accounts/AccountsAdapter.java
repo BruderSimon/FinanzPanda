@@ -2,6 +2,7 @@ package com.engel.finanzpanda.accounts;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class AccountsAdapter extends BaseAdapter {
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //...and use it to render Layout XML in view structure
-            view = inflater.inflate(R.layout.accounts_item, null,  false);
+            view = inflater.inflate(R.layout.accounts_item_v2, null,  false);
         }
 
         TextView accountBalance = view.findViewById(R.id.account_balance);
@@ -57,19 +58,32 @@ public class AccountsAdapter extends BaseAdapter {
         TextView accountName = view.findViewById(R.id.account_name);
         accountName.setText(account.name);
 
-        TextView accountInfo = view.findViewById(R.id.account_additonal_info);
-        accountInfo.setText("IBAN: ");
+        //TextView accountInfo = view.findViewById(R.id.account_additonal_info);
+        //accountInfo.setText("IBAN: ");
 
         ImageView accountLogo = view.findViewById(R.id.imageView);
+        //Todo Async Class for all Networking
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            accountLogo.setImageDrawable(getNetworkImage(account.logo_link));
+        }
 
+        return view;
+    }
+
+
+    private Drawable getNetworkImage(String link) {
         try {
-            InputStream is = (InputStream) new URL(account.logo_link).getContent();
+            InputStream is = (InputStream) new URL(link).getContent();
             Drawable d = Drawable.createFromStream(is, "src name");
-            accountLogo.setImageDrawable(d);
+           return d;
         } catch (Exception e) {
             System.out.println("Account Image Error");
             e.printStackTrace();
+            return null;
         }
-        return view;
     }
 }
