@@ -7,46 +7,24 @@
     android:background="@color/night_blue"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <FrameLayout
+        android:id="@+id/fragment_view"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center|top"
-        android:orientation="vertical"
-        android:paddingTop="5dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/balance_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/happy_monkey"
-            android:text="Balance"
-            android:textColor="@color/pand_white"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/overall_balance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/happy_monkey"
-            android:text="00000"
-            android:textColor="@color/lime_green"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/accounts_listview"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="262dp"
+        android:layout_height="wrap_content"
+        android:background="@color/panda_black"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
+        app:itemTextColor="@drawable/bottom_navigation_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.135" />
-
+        app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

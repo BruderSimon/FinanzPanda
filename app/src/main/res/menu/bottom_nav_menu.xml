@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/account_overview"
+        android:icon="@drawable/ic_account_overview"
+        android:title="Overview" />
+
+    <item
+        android:id="@+id/analytics"
+        android:icon="@drawable/ic_baseline_donut_large_24"
+        android:title="Analytics" />
+
+    <item android:title="Item" />
+</menu>

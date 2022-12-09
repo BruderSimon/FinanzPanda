@@ -9,15 +9,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.core.content.ContextCompat;
+
 import com.engel.finanzpanda.R;
+
 import java.io.InputStream;
 import java.net.URL;
 
 public class AccountsAdapter extends BaseAdapter {
     Account[] accounts;
 
-    public AccountsAdapter(Account[] accounts){
+    public AccountsAdapter(Account[] accounts) {
         this.accounts = accounts;
     }
 
@@ -41,17 +44,17 @@ public class AccountsAdapter extends BaseAdapter {
         Context context = viewGroup.getContext();
         Account account = accounts[i];
 
-        if(view == null){
+        if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //...and use it to render Layout XML in view structure
-            view = inflater.inflate(R.layout.accounts_item_v2, null,  false);
+            view = inflater.inflate(R.layout.accounts_item_v2, null, false);
         }
 
         TextView accountBalance = view.findViewById(R.id.account_balance);
         accountBalance.setText(account.balance);
-        if(account.balance.charAt(0) == '-'){
+        if (account.balance.charAt(0) == '-') {
             accountBalance.setTextColor(ContextCompat.getColor(context, R.color.imperia_red));
-        }else{
+        } else {
             accountBalance.setTextColor(ContextCompat.getColor(context, R.color.lime_green));
         }
 
@@ -79,7 +82,7 @@ public class AccountsAdapter extends BaseAdapter {
         try {
             InputStream is = (InputStream) new URL(link).getContent();
             Drawable d = Drawable.createFromStream(is, "src name");
-           return d;
+            return d;
         } catch (Exception e) {
             System.out.println("Account Image Error");
             e.printStackTrace();

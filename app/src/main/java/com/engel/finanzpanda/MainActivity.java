@@ -1,13 +1,16 @@
 package com.engel.finanzpanda;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.view.MenuItem;
 
-import com.engel.finanzpanda.accounts.Account;
-import com.engel.finanzpanda.accounts.AccountsAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import com.engel.finanzpanda.accounts.AccountsOverviewFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,16 +19,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Account[] accounts = {
-                new Account("+1000", "Sparkasse", "https://cdn.nordigen.com/ais/SPK_DACHAU_BYLADEM1DAH.png"),
-                new Account("-54", "N26 Bank", "https://cdn.nordigen.com/ais/N26_SANDBOX_NTSBDEB1.png")
-        };
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        AccountsAdapter accountsAdapter = new AccountsAdapter(accounts);
+        AccountsOverviewFragment accountsOverview = new AccountsOverviewFragment();
 
-        ListView accountsListView = findViewById(R.id.accounts_listview);
-        accountsListView.setAdapter(accountsAdapter);
-
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.account_overview:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_view, accountsOverview).commit();
+                        return true;
+                }
+                return false;
+            }
+        });
+        bottomNavigationView.setSelectedItemId(R.id.account_overview);
+        bottomNavigationView.setItemActiveIndicatorColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.lime_green)));
+        bottomNavigationView.setItemActiveIndicatorEnabled(true);
 
 
     }
