@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/happy_monkey"
             android:text="Balance"
-            android:textColor="@color/pand_white"
+            android:textColor="@color/panda_white"
             android:textSize="25sp" />
 
         <TextView
